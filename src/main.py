@@ -28,10 +28,12 @@ def main() -> None:
     used_characters: str = DEFAULT_USED_CHARACTERS
     password_size: int = DEFAULT_PASSWORD_SIZE
     
-    flags = get_flags(args=argv[1::])
+    # flags = get_flags(args=argv[1::])
     
     generator = PasswordGenerator(used_characters, password_size)
     password = generator.generate()
+    
+    print(password)
 
 
 if __name__ == "__main__":
