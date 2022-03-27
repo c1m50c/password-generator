@@ -1,9 +1,7 @@
-# TODO: Functionality for saving to a `.txt` file.
-# TODO: Functionality for saving to a QR Code.
-
 from generator import PasswordGenerator
 from flags import get_flags
 
+from qrcode import make as make_qr_code
 from string import ascii_letters
 from typing import Dict, List
 from sys import argv
@@ -17,13 +15,16 @@ DEFAULT_USED_CHARACTERS: str = ascii_letters + \
 # "-FlagName": [ "Required", "Parameters" ],
 VALID_FLAGS: Dict[str, List[str]] = {
     # Characters used in generation, defaults to `DEFAULT_USED_CHARACTERS`.
-    "-c": [ "String" ],
+    "-c": [ "Characters : String" ],
     
     # Digits in the outputed password, defaults to `DEFAULT_PASSWORD_SIZE`.
-    "-d": [ "Integer" ],
+    "-d": [ "Amount : Integer" ],
     
     # If present, saves the password as a QR Code.
-    "-qr": [  ],
+    "-qr": [ "FilePath : String" ],
+    
+    # If present, saves the password as a file.
+    "-f": [ "FilePath : String" ],
 }
 
 
@@ -44,6 +45,14 @@ def main() -> None:
     password = generator.generate()
     
     print(password)
+    
+    if "-qr" in flags:
+        qr_code = make_qr_code(password)
+        qr_code.save(flags["-qr"][0])
+    
+    if "-f" in flags:
+        with open(flags["-f"][0], "w") as file:
+            file.write(password)
 
 
 if __name__ == "__main__":
