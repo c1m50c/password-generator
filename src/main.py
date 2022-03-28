@@ -3,6 +3,7 @@ from flags import get_flags
 
 from qrcode import make as make_qr_code
 from typing import Dict, List, Union
+from rich.console import Console
 from string import ascii_letters
 from sys import argv
 
@@ -48,28 +49,30 @@ VALID_FLAGS: Dict[str, Dict[str, Union[List[str], str]]] = {
 }
 
 
-def print_helpful_info() -> None:
+def print_helpful_info(console: Console) -> None:
     """
         Method called by the `-h` flag,
         and when automatically when there are no arugments given to the application.
     """
     
-    print("Password Generator ~ Help")
+    console.print("[bold cyan]Password Generator[/bold cyan] ~ [bold green]Help[/bold green]\n")
     
     for flag, values in VALID_FLAGS.items():
-        print(f"Flag '{flag}':")
+        console.print(f"[yellow]Flag [bold]'{flag}'[/bold][/yellow]:")
 
         for inner_flag, inner_values in values.items():
-            print(f"\t{inner_flag}:")
-            print(f"\t\t{inner_values}")
+            console.print(f"\t[bold blue]{inner_flag}[/bold blue]:")
+            console.print(f"\t\t[bold]{inner_values}[/bold]")
         
         print()
 
 
 def main() -> None:
-    if len(argv) <= 1:
-        print_helpful_info()
-        return
+    console = Console()
+    
+    # if len(argv) <= 1:
+    #     print_helpful_info(console)
+    #     return
 
     flags = get_flags(args=argv[1::])
     
@@ -86,18 +89,23 @@ def main() -> None:
     generator = PasswordGenerator(characters, password_size)
     password = generator.generate()
     
-    print(password)
+    console.print(f"[bold][yellow]>>>[/yellow] [magenta]{password}[/magenta][/bold]")
     
     if "-qr" in flags:
         qr_code = make_qr_code(password)
-        qr_code.save(flags["-qr"][0])
+        path = flags["-qr"][0]
+        
+        qr_code.save(path)
+        console.print(f"[bold green]Saved generated password as a QR Code to [white]'{path}'[/white].[/bold green]")
     
     if "-f" in flags:
-        with open(flags["-f"][0], "w") as file:
+        path = flags["-f"][0]
+        with open(path, "w") as file:
             file.write(password)
+            console.print(f"[bold green]Saved generated password as a text file to [white]'{path}'[/white].[/bold green]")
     
     if "-h" in flags:
-        print_helpful_info()
+        print_helpful_info(console)
 
 
 if __name__ == "__main__":
