@@ -15,17 +15,22 @@ $ pip install -r ./requirements.txt
 
 
 ## **Examples**
+### **QR Code Generation**
 ```bash
 $ cd password-generator
-$ python3 src/main.py -c aAbBcC -f ./output.txt
->> BaBbCCbbAbbaCACb
-$ cat ./output.txt
->> BaBbCCbbAbbaCACb
+$ python3 src/main.py -qr ./output.bmp
+>> >>> A4JYL,$23r;mt$F#
+>> Saved generated password as a QR Code to './output.bmp'.
+$ ./output.bmp
 ```
+![Generated QRCode Example](qrc_example.bmp)
 
+
+
+### **Finding Helpful Information**
 ```bash
 $ cd password-generator
-$ python3 src/main.py
+$ python3 src/main.py -h
 >> Password Generator ~ Help
 >> ...
 ```
