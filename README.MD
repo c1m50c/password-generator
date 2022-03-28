@@ -6,6 +6,14 @@
 Password Generator CLI written in Python, has a lot of options to make the application as customizable as you would like. Some of the more useful features including the ability to define your own character set, password length, and if you would like to save it as a text file or QR Code.
 
 
+## **Installing Requirements**
+```bash
+$ cd password-generator
+$ pip install -r ./requirements.txt
+>> ...
+```
+
+
 ## **Examples**
 ```bash
 $ cd password-generator
