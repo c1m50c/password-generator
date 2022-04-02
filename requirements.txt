@@ -1,2 +1,3 @@
-qrcode
-rich
+pyperclip # For copy to clipboard functionality.
+qrcode # For saving the generated password as a QR Code.
+rich # For terminal / shell highlighting.

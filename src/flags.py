@@ -28,8 +28,7 @@ def get_flags(args: List[str]) -> Dict[str, List[str]]:
             result[current] = [  ]
             
             while args:
-                if args[0][0] == "-":
-                    break
+                if args[0][0] == "-": break
                 result[current].append(args.pop(0))
     
     return result

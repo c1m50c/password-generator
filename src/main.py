@@ -1,3 +1,4 @@
+from pyperclip import copy as copy_to_clipboard
 from qrcode import make as make_qr_code
 from typing import Dict, List, Union
 from rich.console import Console
@@ -13,50 +14,50 @@ DEFAULT_USED_CHARACTERS: str = ascii_letters + \
 
 
 # "-FlagName": [ "Required : Type", "Parameters : Type" ],
-VALID_FLAGS: Dict[str, Dict[str, Union[List[str], str]]] = {
-    # Characters used in generation, defaults to `DEFAULT_USED_CHARACTERS`.
+FLAGS: Dict[str, Dict[str, Union[List[str], str]]] = {
     "-c": {
         "parameters": [ "Characters : String" ],
         "description": f"Defines the characters used in password generation.",
         "default_value": f"{DEFAULT_USED_CHARACTERS}",
     },
     
-    # Digits in the outputed password, defaults to `DEFAULT_PASSWORD_SIZE`.
     "-d": {
         "parameters": [ "Amount : Integer" ],
         "description": f"Defines the length of the generated password.",
         "default_value": f"{DEFAULT_PASSWORD_SIZE}",
     },
     
-    # If present, saves the password as a QR Code.
     "-qr": {
         "parameters": [ "FilePath : String" ],
         "description": "If present within the flags, the application will save the generated password as a QR Code.",
     },
     
-    # If present, saves the password as a file.
     "-f": {
         "parameters": [ "FilePath : String" ],
         "description": "If present within the flags, the application will save the generated password as text in a file.",
     },
     
-    # If present, calls the `print_helpful_info()` method.
     "-h": {
         "parameters": [  ],
         "description": "Outputs all valid flags and other helpful information.",
-    }
+    },
+    
+    "-copy": {
+        "parameters": [  ],
+        "description": "If present, copies the generated password to the clipboard.",
+    },
 }
 
 
 def print_helpful_info(console: Console) -> None:
     """
         Method called by the `-h` flag,
-        prints the contents of the `VALID_FLAGS` dictionary to the standard output.
+        prints the contents of the `FLAGS` dictionary to the standard output.
     """
     
     console.print("[bold cyan]Password Generator[/bold cyan] ~ [bold green]Help[/bold green]\n")
     
-    for flag, values in VALID_FLAGS.items():
+    for flag, values in FLAGS.items():
         console.print(f"[yellow]Flag [bold]'{flag}'[/bold][/yellow]:")
 
         for inner_flag, inner_values in values.items():
@@ -86,9 +87,9 @@ def main() -> None:
     console = Console()
     
     for flag, parameters in flags.items():
-        if flag in VALID_FLAGS:
-            if len(parameters) != len(VALID_FLAGS[flag]["parameters"]):
-                raise Exception(f"Invalid amount of parameters passed to flag '{flag}', expected parameters {VALID_FLAGS[flag]['parameters']}.")
+        if flag in FLAGS:
+            if len(parameters) != len(FLAGS[flag]["parameters"]):
+                raise Exception(f"Invalid amount of parameters passed to flag '{flag}', expected parameters {FLAGS[flag]['parameters']}.")
         else:
             raise Exception(f"Passed flag '{flag}' does not exist and cannot be processed.")
     
@@ -113,6 +114,10 @@ def main() -> None:
     
     if "-h" in flags:
         print_helpful_info(console)
+    
+    if "-copy" in flags:
+        copy_to_clipboard(password)
+        console.print(f"[bold green]Copied generated password to clipboard.[/bold green]")
 
 
 if __name__ == "__main__":
