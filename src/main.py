@@ -1,9 +1,9 @@
-from generator import PasswordGenerator
 from qrcode import make as make_qr_code
 from typing import Dict, List, Union
 from rich.console import Console
 from string import ascii_letters
 from flags import get_flags
+from random import randint
 from sys import argv
 
 
@@ -51,7 +51,7 @@ VALID_FLAGS: Dict[str, Dict[str, Union[List[str], str]]] = {
 def print_helpful_info(console: Console) -> None:
     """
         Method called by the `-h` flag,
-        and when automatically when there are no arugments given to the application.
+        prints the contents of the `VALID_FLAGS` dictionary to the standard output.
     """
     
     console.print("[bold cyan]Password Generator[/bold cyan] ~ [bold green]Help[/bold green]\n")
@@ -64,6 +64,21 @@ def print_helpful_info(console: Console) -> None:
             console.print(f"\t\t[bold]{inner_values}[/bold]")
         
         print()
+
+
+def generate_password(characters: str, size: int) -> str:
+    """
+        Generates a random password equal in length to `size`, while containing the `characters` within the string.
+        
+        # Example
+        ```py
+        password = generate_password("aAbBcC", 4)
+        assert password == aBCa # Value is not concrete, but could equal this.
+        ```
+    """
+    
+    get_random_char = lambda : characters[randint(0, len(characters) - 1)]
+    return "".join([ get_random_char() for _ in range(0, size) ])
 
 
 def main() -> None:
@@ -79,9 +94,7 @@ def main() -> None:
     
     characters = DEFAULT_USED_CHARACTERS if "-c" not in flags else flags["-c"][0]
     password_size = DEFAULT_PASSWORD_SIZE if "-d" not in flags else int(flags["-d"][0])
-    
-    generator = PasswordGenerator(characters, password_size)
-    password = generator.generate()
+    password = generate_password(characters, password_size)
     
     console.print(f"[bold][yellow]>>>[/yellow] [magenta]{password}[/magenta][/bold]")
     
