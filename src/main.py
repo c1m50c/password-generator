@@ -1,17 +1,16 @@
 from generator import PasswordGenerator
-from flags import get_flags
-
 from qrcode import make as make_qr_code
 from typing import Dict, List, Union
 from rich.console import Console
 from string import ascii_letters
+from flags import get_flags
 from sys import argv
 
 
 DEFAULT_PASSWORD_SIZE: int = 16
-
 DEFAULT_USED_CHARACTERS: str = ascii_letters + \
     "0123456789" + "!@#$%^&*()-=_+[]{};:,."
+
 
 # "-FlagName": [ "Required : Type", "Parameters : Type" ],
 VALID_FLAGS: Dict[str, Dict[str, Union[List[str], str]]] = {
@@ -68,13 +67,8 @@ def print_helpful_info(console: Console) -> None:
 
 
 def main() -> None:
-    console = Console()
-    
-    # if len(argv) <= 1:
-    #     print_helpful_info(console)
-    #     return
-
     flags = get_flags(args=argv[1::])
+    console = Console()
     
     for flag, parameters in flags.items():
         if flag in VALID_FLAGS:
@@ -83,8 +77,8 @@ def main() -> None:
         else:
             raise Exception(f"Passed flag '{flag}' does not exist and cannot be processed.")
     
-    characters: str = DEFAULT_USED_CHARACTERS if "-c" not in flags else flags["-c"][0]
-    password_size: int = DEFAULT_PASSWORD_SIZE if "-d" not in flags else int(flags["-d"][0])
+    characters = DEFAULT_USED_CHARACTERS if "-c" not in flags else flags["-c"][0]
+    password_size = DEFAULT_PASSWORD_SIZE if "-d" not in flags else int(flags["-d"][0])
     
     generator = PasswordGenerator(characters, password_size)
     password = generator.generate()
