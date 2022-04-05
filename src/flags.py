@@ -25,7 +25,7 @@ def get_flags(args: List[str]) -> Dict[str, List[str]]:
         current = args.pop(0)
         
         if current[0] == "-":
-            result[current] = [  ]
+            result[current] = [  ] # Flag Parameters
             
             while args:
                 if args[0][0] == "-": break

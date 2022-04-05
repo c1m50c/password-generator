@@ -28,6 +28,8 @@ $ ./output.bmp
 
 
 ### **Finding Helpful Information**
+Helpful information includes all flags you can pass through the application,
+and descriptions of them and their parameters.
 ```bash
 $ cd password-generator
 $ python3 src/main.py -h
