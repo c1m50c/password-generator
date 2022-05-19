@@ -1,3 +1,11 @@
-pyperclip # For copy to clipboard functionality.
-qrcode # For saving the generated password as a QR Code.
-rich # For terminal / shell highlighting.
+# For copy to clipboard functionality.
+pyperclip
+
+# For saving the generated password as a QR Code.
+qrcode
+
+# For terminal / shell highlighting.
+rich
+
+# Dependency for `qrcode`, not properly installed with `qrcode` on its own.
+Pillow
