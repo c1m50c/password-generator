@@ -1,12 +1,13 @@
 from pyperclip import copy as copy_to_clipboard
 from qrcode import make as make_qr_code
-from typing import Dict, List, Union
 from rich.console import Console
+
+from typing import Dict, List, Union
 from string import ascii_letters
-from flags import get_flags
 from random import randint
 from sys import argv
 
+from app.flags import get_flags
 
 DEFAULT_PASSWORD_SIZE: int = 18
 DEFAULT_USED_CHARACTERS: str = ascii_letters + \
