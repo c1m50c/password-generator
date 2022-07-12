@@ -6,25 +6,25 @@ from qrcode import make as make_qr_code
 from pyperclip import copy as copy_to_clipboard
 from rich.console import Console
 
-from app.flags import get_flags
+from password_generator.flags import get_flags
+
 
 DEFAULT_PASSWORD_SIZE: int = 18
 DEFAULT_USED_CHARACTERS: str = ascii_letters + \
     "0123456789" + "!@#$%^&*()-=_+[]{};:,."
 
-
 # "-FlagName": { "parameters": [ NAME : TYPE ], "description": "This Flag does X." .. },
 FLAGS: Dict[str, Dict[str, Union[List[str], str]]] = {
     "-c": {
         "parameters": [ "Characters : String" ],
-        "description": f"Defines the characters used in password generation.",
+        "description": "Defines the characters used in password generation.",
         "default_value": f"{DEFAULT_USED_CHARACTERS}",
         "example": "-c aAbBcCdDeEfF0123456789",
     },
 
     "-d": {
         "parameters": [ "Amount : Integer" ],
-        "description": f"Defines the length of the generated password.",
+        "description": "Defines the length of the generated password.",
         "default_value": f"{DEFAULT_PASSWORD_SIZE}",
         "example": "-d 32",
     },
@@ -114,7 +114,7 @@ def main() -> None:
 
     if "-f" in flags:
         path = flags["-f"][0]
-        with open(path, "w") as file:
+        with open(path, "w", encoding="utf-8") as file:
             file.write(password)
             console.print(f"[bold green]Saved generated password as a text file to [white]'{path}'[/white].[/bold green]")
 
@@ -123,7 +123,7 @@ def main() -> None:
 
     if "-copy" in flags:
         copy_to_clipboard(password)
-        console.print(f"[bold green]Copied generated password to clipboard.[/bold green]")
+        console.print("[bold green]Copied generated password to clipboard.[/bold green]")
 
 
 if __name__ == "__main__":

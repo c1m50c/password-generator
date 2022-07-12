@@ -17,6 +17,9 @@ pytest = "^7.1.2"
 pylint = "^2.14.4"
 mypy = "^0.961"
 
+[tool.poetry.scripts]
+generate = "password_generator.main:main"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

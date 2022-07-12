@@ -1,4 +1,4 @@
-from app.main import generate_password
+from password_generator.main import generate_password
 
 
 def test_password_generation() -> None:

@@ -1,5 +1,6 @@
 # **password-generator**
 
+![GitHub Verify Workflow Status](https://img.shields.io/github/workflow/status/c1m50c/password-generator/Verify?label=Tests&style=for-the-badge)
 ![GitHub License](https://img.shields.io/github/license/c1m50c/password-generator?color=blue&style=for-the-badge)
 ![Lines of Code](https://img.shields.io/tokei/lines/github/c1m50c/password-generator?style=for-the-badge)
 
@@ -9,7 +10,7 @@ Password Generator CLI written in Python. Some of the more useful features inclu
 ## **Installing Requirements**
 ```bash
 $ cd password-generator
-$ pip install -r ./requirements.txt
+$ poetry install
 >> ...
 ```
 
@@ -18,8 +19,8 @@ $ pip install -r ./requirements.txt
 ### **QR Code Generation**
 ```bash
 $ cd password-generator
-$ python3 src/main.py -qr ./output.bmp
->> >>> A4JYL,$23r;mt$F#
+$ poetry run generate -qr ./output.bmp
+>> ...
 >> Saved generated password as a QR Code to './output.bmp'.
 $ ./output.bmp
 ```
@@ -32,7 +33,7 @@ Helpful information includes all flags you can pass through the application,
 and descriptions of them and their parameters.
 ```bash
 $ cd password-generator
-$ python3 src/main.py -h
+$ poetry run generate -h
 >> Password Generator ~ Help
 >> ...
 ```
