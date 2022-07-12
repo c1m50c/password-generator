@@ -10,7 +10,7 @@ Password Generator CLI written in Python. Some of the more useful features inclu
 ## **Installing Requirements**
 ```bash
 $ cd password-generator
-$ pip install -r ./requirements.txt
+$ poetry install
 >> ...
 ```
 
@@ -19,8 +19,8 @@ $ pip install -r ./requirements.txt
 ### **QR Code Generation**
 ```bash
 $ cd password-generator
-$ python3 src/main.py -qr ./output.bmp
->> >>> A4JYL,$23r;mt$F#
+$ poetry run py app/main.py -qr ./output.bmp
+>> ...
 >> Saved generated password as a QR Code to './output.bmp'.
 $ ./output.bmp
 ```
@@ -33,7 +33,7 @@ Helpful information includes all flags you can pass through the application,
 and descriptions of them and their parameters.
 ```bash
 $ cd password-generator
-$ python3 src/main.py -h
+$ poetry run py app/main.py -h
 >> Password Generator ~ Help
 >> ...
 ```
