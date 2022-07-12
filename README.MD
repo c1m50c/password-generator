@@ -19,7 +19,7 @@ $ poetry install
 ### **QR Code Generation**
 ```bash
 $ cd password-generator
-$ poetry run py app/main.py -qr ./output.bmp
+$ poetry run generate -qr ./output.bmp
 >> ...
 >> Saved generated password as a QR Code to './output.bmp'.
 $ ./output.bmp
@@ -33,7 +33,7 @@ Helpful information includes all flags you can pass through the application,
 and descriptions of them and their parameters.
 ```bash
 $ cd password-generator
-$ poetry run py app/main.py -h
+$ poetry run generate -h
 >> Password Generator ~ Help
 >> ...
 ```
