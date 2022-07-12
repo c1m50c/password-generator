@@ -1,5 +1,6 @@
 # **password-generator**
 
+![GitHub Verify Workflow Status](https://img.shields.io/github/workflow/status/c1m50c/password-generator/Verify?label=Tests&style=for-the-badge)
 ![GitHub License](https://img.shields.io/github/license/c1m50c/password-generator?color=blue&style=for-the-badge)
 ![Lines of Code](https://img.shields.io/tokei/lines/github/c1m50c/password-generator?style=for-the-badge)
 
