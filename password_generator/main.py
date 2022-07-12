@@ -6,12 +6,12 @@ from qrcode import make as make_qr_code
 from pyperclip import copy as copy_to_clipboard
 from rich.console import Console
 
-from flags import get_flags
+from password_generator.flags import get_flags
+
 
 DEFAULT_PASSWORD_SIZE: int = 18
 DEFAULT_USED_CHARACTERS: str = ascii_letters + \
     "0123456789" + "!@#$%^&*()-=_+[]{};:,."
-
 
 # "-FlagName": { "parameters": [ NAME : TYPE ], "description": "This Flag does X." .. },
 FLAGS: Dict[str, Dict[str, Union[List[str], str]]] = {
